@@ -16,6 +16,10 @@ class ApiLinks {
     static GET_CHAT_HISTORY = (chatId) => `/chats/${chatId}`;
     static DELETE_CHAT = (chatId) => `/chats/clear/${chatId}`;
     static GET_ALL_CHATS =  `/chats/get/all`;
+
+    //Prompt
+    static GET_PROMPT = '/prompt';
+    static UPDATE_PROMPT = '/prompt';
     
 }
   

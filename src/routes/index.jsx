@@ -11,6 +11,7 @@ import MainLayout from '../layout/MainLayout';
 import Loadable from '../components/Loadable';
 import { ProtectedRoute } from './protectedRoute';
 import NotFound from '../pages/NotFound';
+import Prompt from '../pages/main/Prompt';
 
 const Login = Loadable(lazy(() => import('../pages/auth/Login')));
 const AddDocument = Loadable(lazy(() => import('../pages/main/AddDocument')));
@@ -55,6 +56,14 @@ const routes = [
               </ProtectedRoute>
             )
         },
+        {
+          path: '/prompt',
+          element: (
+            <ProtectedRoute>
+              <Prompt />
+            </ProtectedRoute>
+          )
+      },
       ]
     },
     {
