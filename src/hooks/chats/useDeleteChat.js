@@ -12,6 +12,8 @@ const useDeleteChat = () => {
     try {
       await dispatch(deleteChat(chatId));
 
+      console.log("chatId: ", chatId)
+
       if (chatId === selectedChatId) {
         dispatch({ type: CLEAR_SELECTED_CHAT });
       }

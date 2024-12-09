@@ -21,7 +21,7 @@ export const getChats = (userId) => async (dispatch) => {
 
 export const selectChat = (chatId) => (dispatch, getState) => {
     const { chats } = getState().chats;
-    const selectedChat = chats.find(chat => chat._id === chatId);
+    const selectedChat = chats.find(chat => chat.chatId === chatId);
 
     if (selectedChat) {
         dispatch({ type: GET_CHAT_HISTORY_SUCCESS, payload: selectedChat.messages });
@@ -47,7 +47,7 @@ export const createChat = (userId, message, setStreamedMessage) => async (dispat
 
     const updatedChatHistory = [...chatHistory, assistantMessage];
     const newChat = {
-      _id: response._id,
+      chatId: response.chatId,
       userId: userId,
       messages: updatedChatHistory,
       title: response.title,
@@ -55,7 +55,7 @@ export const createChat = (userId, message, setStreamedMessage) => async (dispat
     };
 
     dispatch({ type: UPDATE_CHAT_HISTORY, payload: updatedChatHistory });
-    dispatch(selectChat(newChat._id));
+    dispatch(selectChat(newChat.chatId));
     dispatch({
       type: CREATE_CHAT_SUCCESS,
       payload: newChat
@@ -69,7 +69,7 @@ export const createChat = (userId, message, setStreamedMessage) => async (dispat
 export const addMessage = (chatId, newMessage, setStreamedMessage, setGenerating) => async (dispatch, getState) => {
   try {
     const { chats } = getState().chats;
-    const selectedChat = chats.find(chat => chat._id === chatId);
+    const selectedChat = chats.find(chat => chat.chatId === chatId);
 
     if (!selectedChat) {
       throw new Error('Chat not found');
@@ -84,7 +84,6 @@ export const addMessage = (chatId, newMessage, setStreamedMessage, setGenerating
     });
 
     const response = await ChatsService.addMessage(chatId, updatedChatHistory, (chunk) => {
-      console.log("steam", chunk);
       setStreamedMessage((prev) => prev + chunk);
     });
 

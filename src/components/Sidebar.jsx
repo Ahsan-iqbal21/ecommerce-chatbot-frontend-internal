@@ -7,6 +7,7 @@ import SelectList from '../assets/SelectList.svg';
 import SelectChat from '../assets/SelectChat.svg';
 import SelectAdd from '../assets/SelectAdd.svg';
 import LogoutIcon from '../assets/Logout.svg';
+import PromptIcon from '../assets/writing-icon.svg'
 import { useUser } from '../contexts/userContext';
 
 const Sidebar = () => {
@@ -46,6 +47,12 @@ const Sidebar = () => {
           src={location.pathname === '/documents/list' ? SelectList : ListIcon}
           onClick={() => handleNavigation('/documents/list')}
           style={{ width: '24px', height: '24px', cursor: 'pointer' }}
+        />
+
+        <img
+          src={location.pathname === '/prompt' ? PromptIcon : PromptIcon}
+          onClick={() => handleNavigation('/prompt')}
+          style={{ width: '24px', height: '24px', cursor: 'pointer',  }}
         />
       </Stack>
 

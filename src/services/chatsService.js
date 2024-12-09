@@ -33,9 +33,9 @@ class ChatsService {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
   
-      const { fullMessage, title, _id } = await processChatStream(reader, decoder, onStreamChunk);
+      const { fullMessage, title, chatId } = await processChatStream(reader, decoder, onStreamChunk);
   
-      return { fullMessage, title, _id };
+      return { fullMessage, title, chatId };
     } catch (error) {
       console.error("Error in streaming chat creation:", error);
       throw error;

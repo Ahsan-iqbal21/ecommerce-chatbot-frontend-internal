@@ -35,7 +35,7 @@ import {
         return {
           ...state,
           chats: [action.payload, ...state.chats],
-          selectedChatId: action.payload._id,
+          selectedChatId: action.payload.chatId,
           chatHistory: action.payload.messages,
           error: null
         };
@@ -49,7 +49,7 @@ import {
         return {
           ...state,
           chats: state.chats.map(chat =>
-            chat._id === action.payload.chatId ? { ...chat, messages: action.payload.chatHistory } : chat
+            chat.chatId === action.payload.chatId ? { ...chat, messages: action.payload.chatHistory } : chat
           ),
           chatHistory: action.payload.chatHistory,
           error: null
@@ -57,7 +57,7 @@ import {
       case DELETE_CHAT_SUCCESS:
         return {
           ...state,
-          chats: state.chats.filter(chat => chat._id !== action.payload),
+          chats: state.chats.filter(chat => chat.chatId !== action.payload),
           error: null
         };
       case SELECT_CHAT:

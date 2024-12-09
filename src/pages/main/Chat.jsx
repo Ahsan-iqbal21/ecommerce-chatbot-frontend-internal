@@ -64,6 +64,7 @@ const Chat = () => {
     setToasterOpen(false);
   };
 
+
   return (
     <Box>
       <Box sx={{ display: 'flex', alignItems: 'center', paddingTop: '35px', paddingLeft: '50px', paddingRight: '50px', justifyContent: 'space-between' }}>
@@ -85,16 +86,16 @@ const Chat = () => {
                   <ListItem
                     button
                     key={index}
-                    onClick={() => handleSelectChat(chat._id)}
-                    selected={selectedChatId === chat._id}
+                    onClick={() => handleSelectChat(chat.chatId)}
+                    selected={selectedChatId === chat.chatId}
                     sx={{
                       mb: '5px',
                       cursor: 'pointer',
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      backgroundColor: selectedChatId === chat._id ? '#F0F4FA' : 'transparent',
-                      borderRadius: selectedChatId === chat._id ? '9px' : '0',
+                      backgroundColor: selectedChatId === chat.chatId ? '#F0F4FA' : 'transparent',
+                      borderRadius: selectedChatId === chat.chatId ? '9px' : '0',
                     }}
                   >
                     <Tooltip
@@ -110,21 +111,21 @@ const Chat = () => {
                       <Typography
                         variant='body5'
                         sx={{
-                          backgroundColor: selectedChatId === chat._id ? '#F0F4FA' : 'transparent',
-                          borderRadius: selectedChatId === chat._id ? '9px' : '0', 
+                          backgroundColor: selectedChatId === chat.chatId ? '#F0F4FA' : 'transparent',
+                          borderRadius: selectedChatId === chat.chatId ? '9px' : '0', 
                         }}
                       >
                         {chat.title.length > 15 ? `${chat.title.substring(0, 15)}...` : chat.title}
                       </Typography>
                     </Tooltip>
-                    {selectedChatId === chat._id && (
-                      deletingChatId === chat._id ? (
+                    {selectedChatId === chat.chatId && (
+                      deletingChatId === chat.chatId ? (
                         <CircularProgress size={20} />
                       ) : (
                         <CloseIcon
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleDelete(chat._id);
+                            handleDelete(chat.chatId);
                           }}
                           sx={{ cursor: 'pointer' }}
                         />

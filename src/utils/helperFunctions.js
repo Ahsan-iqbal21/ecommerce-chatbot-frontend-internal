@@ -29,7 +29,7 @@ export const formatDate = (dateString) => {
 export const processChatStream = async (reader, decoder, onStreamChunk) => {
   let fullMessage = '';
   let title = '';
-  let _id = '';
+  let chatId = '';
 
   while (true) {
     const { done, value } = await reader.read();
@@ -52,12 +52,12 @@ export const processChatStream = async (reader, decoder, onStreamChunk) => {
         const jsonStr = chunk.slice(jsonStart, jsonEnd + 1);
         const data = JSON.parse(jsonStr);
         if (data.title) title = data.title;
-        if (data.id) _id = data.id;
+        if (data.id) chatId = data.id;
       }
     } catch (error) {
       console.log("Error parsing message", error);
     }
   }
 
-  return { fullMessage, title, _id };
+  return { fullMessage, title, chatId };
 }
