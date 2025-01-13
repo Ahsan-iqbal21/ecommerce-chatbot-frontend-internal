@@ -20,6 +20,14 @@ class ApiLinks {
     //Prompt
     static GET_PROMPT = '/prompt';
     static UPDATE_PROMPT = '/prompt';
+
+    //Escalations
+    static GET_ALL_ESCALATIONS = '/escalation';
+    static CHANGE_ESCALATION_STATUS = (escalationId) => `/escalation/${escalationId}`;
+
+    //Followups
+    static GET_ALL_FOLLOWUPS = '/followup';
+    static CHANGE_FOLLOWUP_STATUS = (followupId) => `/followup/${followupId}`;
     
 }
   

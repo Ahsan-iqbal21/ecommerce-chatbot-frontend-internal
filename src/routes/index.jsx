@@ -12,6 +12,8 @@ import Loadable from '../components/Loadable';
 import { ProtectedRoute } from './protectedRoute';
 import NotFound from '../pages/NotFound';
 import Prompt from '../pages/main/Prompt';
+import Escalations from '../pages/main/Escalations';
+import Followups from '../pages/main/Followups';
 
 const Login = Loadable(lazy(() => import('../pages/auth/Login')));
 const AddDocument = Loadable(lazy(() => import('../pages/main/AddDocument')));
@@ -63,6 +65,22 @@ const routes = [
               <Prompt />
             </ProtectedRoute>
           )
+      },
+      {
+        path: '/escalations',
+        element: (
+          <ProtectedRoute>
+            <Escalations />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path: '/followups',
+        element: (
+          <ProtectedRoute>
+            <Followups />
+          </ProtectedRoute>
+        )
       },
       ]
     },
