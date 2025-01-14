@@ -9,17 +9,17 @@ const useFollowups = () => {
 
   useEffect(() => {
     const fetchFollowups = async () => {
-      if (!followups) {
-        setLoading(true);
-        try {
-          await dispatch(getFollowups());
-        } finally {
-          setLoading(false);
-        }
+      setLoading(true);
+      try {
+        await dispatch(getFollowups());
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchFollowups();
+    if (!followups || followups.length === 0) {
+      fetchFollowups();
+    }
   }, [dispatch, followups]);
 
   return { followups, error, loading };

@@ -9,17 +9,17 @@ const useEscalations = () => {
 
     useEffect(() => {
         const fetchEscalations = async () => {
-          if (!escalations) {
             setLoading(true);
             try {
                 await dispatch(getEscalations());
             } finally {
                 setLoading(false);
             }
-          }
         };
 
-        fetchEscalations();
+        if (!escalations || escalations.length === 0) {
+            fetchEscalations();
+        }
     }, [dispatch, escalations]);
 
     return { escalations, error, loading };

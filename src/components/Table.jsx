@@ -21,6 +21,7 @@ import Reject from "../assets/Reject.svg";
 import Resolved from "../assets/Resolved.svg";
 import Rejected from "../assets/Rejected.svg";
 import History from "../assets/History.svg";
+import { formatDate } from "../utils/helperFunctions";
 
 const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
   const [page, setPage] = useState(0);
@@ -187,6 +188,11 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
                   Summary
                 </Typography>
               </TableCell>
+              <TableCell align="left" sx={{ minWidth: "125px" }}>
+                <Typography variant="h8" sx={{ fontWeight: "bold" }}>
+                  Created At
+                </Typography>
+              </TableCell>
               <TableCell align="left" sx={{ minWidth: "100px" }}>
                 <Typography variant="h8" sx={{ fontWeight: "bold" }}>
                   Action
@@ -221,6 +227,11 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
                   <TableCell align="left" sx={{ minWidth: "100px" }}>
                     <Typography variant="h7">
                       {query.conversationSummary}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="left" sx={{ minWidth: "125px" }}>
+                    <Typography variant="h7">
+                      {formatDate(query.createdAt)}
                     </Typography>
                   </TableCell>
                   <TableCell align="center">
@@ -283,15 +294,15 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
               gap: '25px',
             }}
           >
-            <Box sx={{width: '200px'}}>
+            <Box sx={{minWidth: '100px'}}>
               <Typography sx={{textAlign: 'left', fontSize: '14px', fontWeight: '500', marginBottom: '5px'}}>Name</Typography>
               <Typography variant="h6">{selectedQuery.userName}</Typography>
             </Box>
-            <Box sx={{width: '200px'}}>
+            <Box sx={{minWidth: '100px'}}>
               <Typography sx={{textAlign: 'left', fontSize: '14px', fontWeight: '500', marginBottom: '5px'}}>Email</Typography>
               <Typography variant="h6" >{selectedQuery.userEmail}</Typography>
             </Box>
-            <Box sx={{width: '200px'}}>
+            <Box sx={{minWidth: '100px'}}>
               <Typography sx={{textAlign: 'left', fontSize: '14px', fontWeight: '500', marginBottom: '5px'}}>Phone No</Typography>
               <Typography variant="h6">{selectedQuery.userPhone}</Typography>
             </Box>
