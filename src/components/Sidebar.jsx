@@ -69,7 +69,7 @@ const Sidebar = () => {
             location.pathname === "/prompt" ? EditPromptSelected : EditPrompt
           }
           onClick={() => handleNavigation("/prompt")}
-          style={{ width: "24px", height: "24px", cursor: "pointer" }}
+          style={{ width: "22px", height: "22px", cursor: "pointer" }}
         />
 
         <img

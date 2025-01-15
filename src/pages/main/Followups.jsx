@@ -20,7 +20,11 @@ const Followups = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
-    const [sortDirection, setSortDirection] = useState("asc");
+    const [sortDirection, setSortDirection] = useState("desc");
+
+    const toggleSortDirection = () => {
+        setSortDirection((prevDirection) => (prevDirection === "asc" ? "desc" : "asc"));
+    };
 
     const handleNavigateToAdd = () => {
         navigate("/chat");
@@ -41,14 +45,6 @@ const Followups = () => {
     const handleFilterChange = (filterValue) => {
         setStatusFilter(filterValue);
         handleFilterClose();
-    };
-
-    const handleSortAsc = () => {
-        setSortDirection("asc");
-    };
-
-    const handleSortDesc = () => {
-        setSortDirection("desc");
     };
 
     const filteredFollowups = followups
@@ -136,26 +132,18 @@ const Followups = () => {
                     </Menu>
                     <Box sx={{ display: "flex" }}>
                         <IconButton
-                            onClick={handleSortAsc}
+                            onClick={toggleSortDirection}
                             sx={{
                                 width: "50px",
                                 height: "50px",
                                 backgroundColor: "#fff",
-                                borderRadius: "8px 0px 0px 8px",
+                                borderRadius: "8px",
                             }}
                         >
-                            <img src={SortUpIcon} alt="sort ascending icon" />
-                        </IconButton>
-                        <IconButton
-                            onClick={handleSortDesc}
-                            sx={{
-                                width: "50px",
-                                height: "50px",
-                                backgroundColor: "#fff",
-                                borderRadius: "0px 8px 8px 0px",
-                            }}
-                        >
-                            <img src={SortIcon} alt="sort descending icon" />
+                            <img 
+                                src={sortDirection === "asc" ? SortUpIcon : SortIcon} 
+                                alt={sortDirection === "asc" ? "sort ascending icon" : "sort descending icon"} 
+                            />
                         </IconButton>
                     </Box>
                 </Box>

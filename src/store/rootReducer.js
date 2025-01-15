@@ -8,12 +8,19 @@ import followupsReducer from './reducers/followup/followupReducer';
 
 // ==============================|| COMBINE REDUCERS ||============================== //
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   user: userReducer,
   documents: documentsReducer,
   chats: chatsReducer,
   escalations: escalationsReducer,
   followups: followupsReducer
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'RESET_STATE') {
+    state = undefined; 
+  }
+  return appReducer(state, action);
+};
 
 export default rootReducer;

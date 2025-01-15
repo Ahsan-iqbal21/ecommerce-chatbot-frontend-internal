@@ -15,6 +15,7 @@ import {
   Button,
   Dialog,
   DialogContent,
+  Tooltip,
 } from "@mui/material";
 import Resolve from "../assets/Resolve.svg";
 import Reject from "../assets/Reject.svg";
@@ -25,7 +26,7 @@ import { formatDate } from "../utils/helperFunctions";
 
 const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(6);
   const [openPopup, setOpenPopup] = useState(false);
   const [chatHistory, setChatHistory] = useState(null);
   const [selectedQuery, setSelectedQuery] = useState(null);
@@ -164,7 +165,7 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
 
   return (
     <Box sx={{ padding: "35px" }}>
-      <TableContainer component={Paper} sx={{ borderRadius: "16px" }}>
+      <TableContainer component={Paper} sx={{ borderRadius: "16px", maxHeight: '72vh' }}>
         <Table sx={{ minWidth: 650 }} aria-label="queries table">
           <TableHead>
             <TableRow>
@@ -225,9 +226,33 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
                     <Typography variant="h7">{query.userPhone}</Typography>
                   </TableCell>
                   <TableCell align="left" sx={{ minWidth: "100px" }}>
-                    <Typography variant="h7">
-                      {query.conversationSummary}
-                    </Typography>
+                    <Tooltip 
+                      title={query.conversationSummary} 
+                      placement="top" 
+                      componentsProps={{
+                        tooltip: {
+                          sx: {
+                            bgcolor: 'white',
+                            color: 'black',
+                            boxShadow: 1,
+                            fontSize: '12px',
+                          },
+                        },
+                      }}
+                    >
+                      <Typography 
+                        variant="h7"
+                        sx={{
+                          display: '-webkit-box',
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          WebkitLineClamp: 3,
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {query.conversationSummary}
+                      </Typography>
+                    </Tooltip>
                   </TableCell>
                   <TableCell align="left" sx={{ minWidth: "125px" }}>
                     <Typography variant="h7">
