@@ -16,6 +16,7 @@ import {
   Dialog,
   DialogContent,
   Tooltip,
+  DialogActions,
 } from "@mui/material";
 import Resolve from "../assets/Resolve.svg";
 import Reject from "../assets/Reject.svg";
@@ -30,6 +31,27 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const [chatHistory, setChatHistory] = useState(null);
   const [selectedQuery, setSelectedQuery] = useState(null);
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    open: false,
+    action: null,
+    queryId: null,
+  });
+
+  const handleOpenConfirmDialog = (action, queryId) => {
+    setConfirmDialog({ open: true, action, queryId });
+  };
+
+  const handleConfirmAction = () => {
+    if (confirmDialog.action && confirmDialog.queryId) {
+      onChangeStatus(confirmDialog.queryId, confirmDialog.action);
+    }
+    setConfirmDialog({ open: false, action: null, queryId: null });
+  };
+
+  const handleCancelConfirmDialog = () => {
+    setConfirmDialog({ open: false, action: null, queryId: null });
+  };
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -58,10 +80,10 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
     if (query.status === "Active") {
       return (
         <>
-          <IconButton sx={{ width: "38px", height: "38px" }} onClick={() => onChangeStatus(queryId, "Resolved")}>
+          <IconButton sx={{ width: "38px", height: "38px" }} onClick={() => handleOpenConfirmDialog("Resolved", queryId)}>
             <img src={Resolve} alt="resolve icon" />
           </IconButton>
-          <IconButton sx={{ width: "38px", height: "38px" }} onClick={() => onChangeStatus(queryId, "Rejected")}>
+          <IconButton sx={{ width: "38px", height: "38px" }} onClick={() => handleOpenConfirmDialog("Rejected", queryId)} >
             <img src={Reject} alt="reject icon" />
           </IconButton>
         </>
@@ -373,6 +395,62 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
               </Box>
             ))}
         </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={confirmDialog.open}
+        onClose={handleCancelConfirmDialog}
+        maxWidth="sm"
+        fullWidth
+        PaperProps={{
+          sx: {
+            borderRadius: "16px",
+            padding: "24px",
+            backgroundColor: "#f8f8f8",
+          },
+        }}
+      >
+        <DialogContent>
+          <Typography
+            variant="h6"
+            align="center"
+            sx={{ fontWeight: "bold", mb: 3, color: "#000" }}
+          >
+            Are you sure you want to {confirmDialog.action?.toLowerCase()} this query?
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: "center", gap: "16px" }}>
+          <Button
+            onClick={handleCancelConfirmDialog}
+            sx={{
+              minWidth: "120px",
+              height: "42px",
+              backgroundColor: "#f5f5f5",
+              color: "#000",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#e0e0e0",
+              },
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleConfirmAction}
+            sx={{
+              minWidth: "120px",
+              height: "42px",
+              backgroundColor: "#5F46CC",
+              color: "white",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#4B3BA6",
+              },
+            }}
+          >
+            Confirm
+          </Button>
+        </DialogActions>
       </Dialog>
     </Box>
   );
