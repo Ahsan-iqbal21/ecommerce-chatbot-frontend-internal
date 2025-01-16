@@ -20,6 +20,7 @@ export const UserProvider = ({ children }) => {
     if (window.logoutTimer) clearTimeout(window.logoutTimer); 
     setUser(null);
     dispatch(logoutReduxAction()); 
+    dispatch({ type: 'RESET_STATE' });
     navigate('/');
   }, [dispatch, navigate]);
 

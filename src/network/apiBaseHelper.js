@@ -17,7 +17,6 @@ class ApiBaseHelper {
   }
 
   static async get(url) {
-    console.log("hello")
     const response = await this.axiosInstance.get(url, {
       headers: {
         'x-user-id': HARDCODED_USER_ID,
