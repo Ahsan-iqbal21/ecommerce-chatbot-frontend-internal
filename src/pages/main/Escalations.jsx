@@ -80,7 +80,7 @@ const Escalations = () => {
             alt="arrow icon"
             style={{ marginRight: "15px", cursor: "pointer" }}
           />
-          <Typography variant="h4">Escalated Queries Page</Typography>
+          <Typography variant="h4">Escalated Queries</Typography>
         </Box>
 
         <Box sx={{ display: "flex", gap: "10px" }}>
@@ -127,7 +127,7 @@ const Escalations = () => {
           >
             <MenuItem onClick={() => handleFilterChange("All")}>All</MenuItem>
             <MenuItem onClick={() => handleFilterChange("Resolved")}>Resolved</MenuItem>
-            <MenuItem onClick={() => handleFilterChange("Unresolved")}>Unresolved</MenuItem>
+            <MenuItem onClick={() => handleFilterChange("Rejected")}>Unresolved</MenuItem>
           </Menu>
           <Box sx={{ display: "flex" }}>
             <IconButton

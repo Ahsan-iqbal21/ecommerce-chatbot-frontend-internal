@@ -57,16 +57,16 @@ const DocumentsList = () => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <Typography variant="h5">Name</Typography>
+                  <Typography variant="h5" sx={{fontWeight: 'bold'}}>Name</Typography>
                 </TableCell>
                 <TableCell align="center">
-                  <Typography variant="h8">File Format</Typography>
+                  <Typography variant="h8" sx={{fontWeight: 'bold'}}>File Format</Typography>
                 </TableCell>
                 <TableCell align="center">
-                  <Typography variant="h8">Uploading Date</Typography>
+                  <Typography variant="h8" sx={{fontWeight: 'bold'}}>Uploading Date</Typography>
                 </TableCell>
                 <TableCell align="center">
-                  <Typography variant="h8">Action</Typography>
+                  <Typography variant="h8" sx={{fontWeight: 'bold'}}>Action</Typography>
                 </TableCell>
               </TableRow>
             </TableHead>

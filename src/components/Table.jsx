@@ -38,20 +38,30 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
     queryId: null,
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleOpenConfirmDialog = (action, queryId) => {
     setConfirmDialog({ open: true, action, queryId });
   };
 
-  const handleConfirmAction = () => {
+  const handleConfirmAction = async () => {
     if (confirmDialog.action && confirmDialog.queryId) {
-      onChangeStatus(confirmDialog.queryId, confirmDialog.action);
+      setIsLoading(true);
+      try {
+        await onChangeStatus(confirmDialog.queryId, confirmDialog.action);
+      } finally {
+        setIsLoading(false);
+        setConfirmDialog({ open: false, action: null, queryId: null });
+      }
     }
-    setConfirmDialog({ open: false, action: null, queryId: null });
   };
 
   const handleCancelConfirmDialog = () => {
-    setConfirmDialog({ open: false, action: null, queryId: null });
+    if (!isLoading) {
+      setConfirmDialog({ open: false, action: null, queryId: null });
+    }
   };
+
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -422,6 +432,7 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
         <DialogActions sx={{ justifyContent: "center", gap: "16px" }}>
           <Button
             onClick={handleCancelConfirmDialog}
+            disabled={isLoading}
             sx={{
               minWidth: "120px",
               height: "42px",
@@ -437,6 +448,7 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
           </Button>
           <Button
             onClick={handleConfirmAction}
+            disabled={isLoading}
             sx={{
               minWidth: "120px",
               height: "42px",
@@ -448,7 +460,7 @@ const QueriesTable = ({ queries, loading, queryType, onChangeStatus }) => {
               },
             }}
           >
-            Confirm
+            {isLoading ? <CircularProgress size={20} sx={{ color: "white" }} /> : "Confirm"}
           </Button>
         </DialogActions>
       </Dialog>
