@@ -81,7 +81,7 @@ const Followups = () => {
                         alt="arrow icon"
                         style={{ marginRight: "15px", cursor: "pointer" }}
                     />
-                    <Typography variant="h4">Follow-Ups Page</Typography>
+                    <Typography variant="h4">Follow-Ups</Typography>
                 </Box>
 
                 <Box sx={{ display: "flex", gap: "10px" }}>
@@ -128,7 +128,7 @@ const Followups = () => {
                     >
                         <MenuItem onClick={() => handleFilterChange("All")}>All</MenuItem>
                         <MenuItem onClick={() => handleFilterChange("Resolved")}>Resolved</MenuItem>
-                        <MenuItem onClick={() => handleFilterChange("Unresolved")}>Unresolved</MenuItem>
+                        <MenuItem onClick={() => handleFilterChange("Rejected")}>Unresolved</MenuItem>
                     </Menu>
                     <Box sx={{ display: "flex" }}>
                         <IconButton
